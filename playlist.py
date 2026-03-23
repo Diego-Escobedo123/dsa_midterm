@@ -1,4 +1,6 @@
 from ll import DoublyLinkedList
+from time import perf_counter
+from memory_profiler import profile
 
 
 class Song:
@@ -59,11 +61,13 @@ class Playlist:
             index += 1
 
 
+# --------- DATA GENERATION (100 canciones dinámicas) ---------
 def build_song_data():
     artists = [
         "The Weeknd", "Bad Bunny", "Taylor Swift", "Karol G", "Billie Eilish",
         "Harry Styles", "Dua Lipa", "Rosalia", "BTS", "Olivia Rodrigo"
     ]
+
     albums = [
         "After Hours", "Un Verano Sin Ti", "Midnights", "Mañana Será Bonito",
         "Happier Than Ever", "Harry's House", "Future Nostalgia", "Motomami",
@@ -71,6 +75,7 @@ def build_song_data():
     ]
 
     songs = []
+
     for i in range(1, 101):
         name = f"Song {i:03d}"
         artist = artists[(i - 1) % len(artists)]
@@ -80,16 +85,24 @@ def build_song_data():
     return songs
 
 
+# Perfilado usando el decorador
+
+@profile
 def load_playlist(playlist):
     for name, artist, album in build_song_data():
         playlist.add_song(name, artist, album)
     return playlist
 
-
 if __name__ == "__main__":
+    start = perf_counter()
+
     playlist = load_playlist(Playlist("My Playlist"))
 
-    print(f"Loaded {len(playlist.songs)} songs")
+    elapsed = perf_counter() - start
+
+    print(f"\nTiempo de carga: {elapsed:.6f} segundos")
+    print(f"Loaded {len(playlist.songs)} songs\n")
+
     playlist.show_playlist()
 
     print("\nCurrent:", playlist.get_current_song())
