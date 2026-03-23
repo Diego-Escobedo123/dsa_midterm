@@ -51,18 +51,45 @@ class Playlist:
 
     def show_playlist(self):
         current = self.songs.head
+        index = 1
         while current:
             marker = "-> " if current == self.current else "   "
-            print(f"{marker}{current.data}")
+            print(f"{marker}{index:03d}. {current.data}")
             current = current.next
+            index += 1
+
+
+def build_song_data():
+    artists = [
+        "The Weeknd", "Bad Bunny", "Taylor Swift", "Karol G", "Billie Eilish",
+        "Harry Styles", "Dua Lipa", "Rosalia", "BTS", "Olivia Rodrigo"
+    ]
+    albums = [
+        "After Hours", "Un Verano Sin Ti", "Midnights", "Mañana Será Bonito",
+        "Happier Than Ever", "Harry's House", "Future Nostalgia", "Motomami",
+        "Butter", "SOUR"
+    ]
+
+    songs = []
+    for i in range(1, 101):
+        name = f"Song {i:03d}"
+        artist = artists[(i - 1) % len(artists)]
+        album = albums[(i - 1) % len(albums)]
+        songs.append((name, artist, album))
+
+    return songs
+
+
+def load_playlist(playlist):
+    for name, artist, album in build_song_data():
+        playlist.add_song(name, artist, album)
+    return playlist
+
 
 if __name__ == "__main__":
-    playlist = Playlist("My Playlist")
+    playlist = load_playlist(Playlist("My Playlist"))
 
-    playlist.add_song("Song 1", "Artist A", "Album X")
-    playlist.add_song("Song 2", "Artist B", "Album Y")
-    playlist.add_song("Song 3", "Artist C", "Album Z")
-
+    print(f"Loaded {len(playlist.songs)} songs")
     playlist.show_playlist()
 
     print("\nCurrent:", playlist.get_current_song())
