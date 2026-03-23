@@ -18,9 +18,9 @@ Su complejidad es O(n) al generar el orden aleatorio y O(1) para avanzar o retro
 
 Primero se debe clonar el repositorio con `git clone <dsa_midterm>` y entrar a la carpeta con `cd <dsa_midterm>`. Después, se instala `memory_profiler` con `pip install memory_profiler`. El programa se ejecuta con `python playlist.py`, y para ver el profiling de memoria se usa `python -m memory_profiler playlist.py`. Para clonar el repositorio se debe poner el siguiente comando: git clone https://github.com/Diego-Escobedo123/dsa_midterm.git
 
-## Estructura del proyecto
+## Estructura del trabajo
 
-El proyecto está compuesto por `ll.py`, donde está la lista doblemente enlazada; `playlist.py`, donde está la lógica de la playlist, la carga de datos, el profiling y el shuffle; y `README.md`, donde está esta documentación.
+El trabjo está compuesto por `ll.py`, donde está la lista doblemente enlazada; `playlist.py`, donde está la lógica de la playlist, la carga de datos, el profiling y el shuffle; y `README.md`, donde está esta documentación.
 
 ## Capturas de pantalla
 
